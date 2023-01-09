@@ -8,6 +8,7 @@ import path from "path";
 import i18next from "i18next";
 import il8nextMiddleware from "i18next-http-middleware";
 import il8nextBackend from "i18next-node-fs-backend";
+import session from "express-session";
 
 // utils
 import coonection from "./src/db/main.js";
@@ -32,7 +33,12 @@ const e = express();
 
 // middleware
 e.use(bodyParser.json());
-e.use(cors({ origin: true, credentials: true }));
+e.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 e.use(cookieParser(process.env.COOKIE_SECRET));
 e.use(helmet());
 
@@ -73,6 +79,10 @@ e.use("/api/v1", globalTime, topics);
 e.use("/api/v1", globalTime, roles);
 e.use("/api/v1", globalTime, feedback);
 e.use("/api/v1", globalTime, topicsMain);
+
+e.get("/", (req, res) =>
+  res.status(200).json({ message: "Success calling api" })
+);
 
 // handle endpoint error
 e.use(errorsHandlers);

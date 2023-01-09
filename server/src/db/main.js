@@ -10,7 +10,6 @@ async function coonection() {
     await mongoose.connect(process.env.DATABASE_URL, config);
     console.log("database connecting");
   } catch (error) {
-    console.log("here");
     console.log(error);
   }
 }

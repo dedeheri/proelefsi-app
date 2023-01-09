@@ -156,11 +156,11 @@ function editArticleAction(id, formData) {
       dispatch({ type: actionType.FETCHING_EDIT_ARTICLE });
       const response = await UPDATEARTICLE(id, formData);
       toaster("success", response.data.message);
-      // if (response.status === 200) {
-      //   setInterval(() => {
-      //     window.location.href = `${baseUrl}/dashboard/article`;
-      //   }, 3000);
-      // }
+      if (response.status === 200) {
+        setInterval(() => {
+          window.location.href = `${baseUrl}/dashboard/article`;
+        }, 3000);
+      }
       dispatch({
         type: actionType.SUCCESS_EDIT_ARTICLE,
         message: response.data.message,
