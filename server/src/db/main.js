@@ -7,10 +7,14 @@ async function coonection() {
       useUnifiedTopology: true,
     };
 
-    await mongoose.connect(process.env.DATABASE_URL, config);
+    await mongoose.connect(process.env.DATABASE_URL, config, (err) => {
+      if (err) {
+        console.log("here");
+      }
+    });
     console.log("database connecting");
   } catch (error) {
-    console.log(error);
+    console.log(JSON.stringify(error));
   }
 }
 

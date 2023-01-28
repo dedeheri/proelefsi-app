@@ -1,46 +1,46 @@
 import React, { useState } from "react";
-import { requestForgetPassword } from "../../action/account";
 import { Button, Input, Proccess } from "../../components";
 import { useTranslation } from "react-i18next";
 import Container from "../../components/auth/Container";
+import { useDispatch, useSelector } from "react-redux";
+import { forgetPasswordAction } from "../../constants/action/auth";
+import { useEffect } from "react";
+import { CLEAR_FORGET_PASSWORD_ACCOUNT } from "../../constants/actiontypes/auth";
 
 function Forget() {
-  const { t } = useTranslation();
-  const [state, setState] = useState({
-    fetching: false,
-    message: {
-      error: "",
-      validation: "",
-      success: "",
-    },
-    email: "",
-  });
+  const dispatch = useDispatch();
 
-  function handleChange(e) {
-    setState((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-      remember_me: e.target.checked,
-    }));
-  }
+  const { validation, fetching, message } = useSelector(
+    (state) => state.forgetPasswordReducer
+  );
+
+  const { t } = useTranslation();
+  const [email, setEmail] = useState("");
 
   async function handleOnSubmit(e) {
     e.preventDefault();
-    await requestForgetPassword(setState, state.email);
+    dispatch(forgetPasswordAction(email));
   }
-  return (
-    <Container onSubmit={handleOnSubmit}>
-      <h1 className="font-medium leading-5">{t("AUTH.FORGET_LABEL_EMAIL")}</h1>
-      <Input
-        placeholder={"Email"}
-        name="email"
-        onChange={handleChange}
-        error={
-          state?.message?.validation?.email?.message || state?.message?.error
-        }
-      />
 
-      {state.fetching ? <Proccess /> : <Button label={t("AUTH.SEND")} />}
+
+  useEffect(() => {
+    return () => dispatch({type : CLEAR_FORGET_PASSWORD_ACCOUNT})
+  },[dispatch])
+
+  return (
+    <Container title={t("AUTH.TITLE.FORGET_PASSWORD")}>
+      <form onSubmit={handleOnSubmit} className="space-y-5">
+        <h1 className="font-medium leading-5">
+          {t("AUTH.FORGET_LABEL_EMAIL")}
+        </h1>
+        <Input
+          placeholder={"Email"}
+          name="email"
+          onChange={(e) => setEmail(e.target.value)}
+          error={validation?.email?.message || message}
+        />
+        {fetching ? <Proccess /> : <Button label={t("AUTH.SEND")} />}
+      </form>
     </Container>
   );
 }

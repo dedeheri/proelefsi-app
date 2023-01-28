@@ -36,6 +36,8 @@ async function searchResult(req, res) {
       }
     }
 
+    console.log(resultData);
+
     if (resultData.length === 0) {
       return res.status(404).json({
         message: "Pencarian tidak ditemukan",

@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 // compontens
 import { Input, Button, Password, Proccess, Checkbox } from "../../components";
 import Container from "../../components/auth/Container";
-import { signInAction } from "../../constants/action";
+import { signInAction } from "../../constants/action/auth";
 import { useDispatch, useSelector } from "react-redux";
 
 function Signin() {
@@ -35,9 +35,12 @@ function Signin() {
     dispatch(signInAction(state));
   }
 
+
   return (
     <Container title={"AUTH.SIGNIN"} onSubmit={handleOnSubmit}>
       <form className="space-y-4" onSubmit={handleOnSubmit}>
+
+
         <Input
           placeholder={"Email"}
           name="email"

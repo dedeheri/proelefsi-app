@@ -17,6 +17,8 @@ import {
   sendMailPassword,
   deleteAccount,
   verifyEmailAccount,
+  signOut,
+  emailOtp,
 } from "../controllers/auth/index.js";
 
 const route = e.Router();
@@ -29,8 +31,10 @@ route.post(
   signUp
 );
 route.post("/auth/signin", validation("LOGIN"), verifyForm, signIn);
-route.get("/auth/otp/resend", tokenVerify, reSendOtp);
+route.get("/auth/otp/resend", reSendOtp);
 route.post("/auth/otp", validation("OTP"), verifyForm, otpVerify);
+route.get("/auth/otp/email-verification", emailOtp);
+route.get("/auth/signout", tokenVerify, signOut);
 
 route.post(
   "/auth/password/forget",

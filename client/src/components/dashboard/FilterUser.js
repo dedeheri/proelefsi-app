@@ -11,7 +11,7 @@ import { Popover, Tab, Transition } from "@headlessui/react";
 import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
 import query from "query-string";
 import { useDispatch, useSelector } from "react-redux";
-import { getRole } from "../../constants/action";
+import { roleAction } from "../../constants/action/dashboard";
 
 // active class name
 const activeStateNavLink =
@@ -28,7 +28,7 @@ function FilterUser() {
   const { data, error, loading, message } = useSelector((state) => state.role);
 
   useEffect(() => {
-    dispatch(getRole());
+    dispatch(roleAction());
   }, [dispatch]);
 
   const queryParams = query.parse(location.search);

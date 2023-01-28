@@ -1,33 +1,22 @@
 import {
   ChartBarIcon,
-  EllipsisVerticalIcon,
   PencilSquareIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
-import { Menu, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import millify from "millify";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import toast from "react-hot-toast";
-import { getAllCookies } from "../../utils/Cookie";
-import { requestChangeArticle } from "../../action/article";
 import Page from "./Page";
 import { useDispatch } from "react-redux";
 import { DELETE_ARTICLE_MODAL } from "../../constants/actiontypes/other";
 import convertToPlain from "../../utils/convertToPlantText";
+import DropdownArticleTable from "./particle/DropdownArticleTable";
 
-function TableArticle({ data, setChange, page, perPage }) {
+function TableArticle({ data, page, perPage }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const cookie = getAllCookies();
-  const [copy, setCopy] = useState({
-    values: "",
-    copied: false,
-  });
 
   const coulums = [
     t("ARTICLE.TABLE.ARTICLE"),
@@ -42,20 +31,6 @@ function TableArticle({ data, setChange, page, perPage }) {
     navigate({
       pathname: `edit/${id}`,
     });
-  }
-
-  const handleCopyLink = () =>
-    toast(t("ARTICLE.COPY_LINK") + copy.values, {
-      style: {
-        borderRadius: "10px",
-        padding: "10px",
-        background: cookie.theme === "dark" ? "#353535" : "#fff",
-        color: cookie.theme === "dark" ? "#fff" : "#000",
-      },
-    });
-
-  function changeDraftOrPublish(id, draft) {
-    requestChangeArticle(setChange, id, draft);
   }
 
   function onClickAnalysis(id) {
@@ -91,38 +66,42 @@ function TableArticle({ data, setChange, page, perPage }) {
               key={i}
               className=" text-black hover:bg-gray-100 dark:hover:bg-[#19191a] border-b duration-400 dark:border-[#3A3B3C] duration-300"
             >
-              <td className=" text-black dark:text-white whitespace-nowrap flex justify-between items-center group px-5 md:px-7 py-5  md:w-full">
+              <td className=" text-black  dark:text-white whitespace-nowrap flex justify-between items-center group px-5 md:px-7 py-5  md:w-full">
                 <div className="flex items-center space-x-5">
                   {/* image */}
-                  <div className="w-40 ">
+                  <div className="w-36 lg:w-40 relative">
                     <img
                       src={d.image_url}
                       alt={d.image_url}
-                      className="rounded-sm"
+                      className="rounded-md h-28 lg:h-32 w-32 lg:w-48"
                     />
-                  </div>
-                  <div className="space-y-1">
                     {d.draft && (
-                      <div className="flex justify-start">
-                        <h1 className="dark:bg-yellow-600 bg-yellow-400 text-sm py-1 px-5  rounded-lg">
-                          draft
-                        </h1>
+                      <div className="absolute inset-0 bg-black bg-opacity-80 rounded-md">
+                        <div className="flex justify-center h-full items-center">
+                          <h1 className="font-medium text-xl text-white">
+                            {t("ARTICLE.DRAFT")}
+                          </h1>
+                        </div>
                       </div>
                     )}
-                    <a href={d.url.originalLink} target="_blank">
+                  </div>
+                  <div className="space-y-1">
+                    <a
+                      href={d.url.originalLink}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <h1 className="text-md font-medium">
                         {d.title.length > 70
                           ? d.title.substring(0, 70) + "..."
                           : d.title}
                       </h1>
                     </a>
-                    <div className="w-[25rem]">
-                      <h1 className="whitespace-normal text-md text-gray-500 dark:text-gray-400 leading-5">
-                        {convertToPlain(d.content).length > 130
-                          ? convertToPlain(d.content).substring(0, 130) + "..."
-                          : convertToPlain(d.content)}
-                      </h1>
-                    </div>
+                    <h1 className="whitespace-normal text-md text-gray-500 dark:text-gray-400 leading-5">
+                      {convertToPlain(d.content).length > 100
+                        ? convertToPlain(d.content).substring(0, 100) + "..."
+                        : convertToPlain(d.content)}
+                    </h1>
                     <div className="items-center flex justify-between space-x-3">
                       <div className="flex items-center space-x-2 opacity-0 group-hover:opacity-100 duration-300">
                         <button
@@ -144,114 +123,8 @@ function TableArticle({ data, setChange, page, perPage }) {
                           <TrashIcon className="w-5" />
                         </button>
                         {/* dropdown */}
+                        <DropdownArticleTable data={d} />
 
-                        <Menu
-                          as="div"
-                          className="relative  inline-block text-left "
-                        >
-                          <div>
-                            <Menu.Button className="dark:text-gray-400 text-gray-500 hover:text-black dark:hover:text-white duration-300 pt-1">
-                              <EllipsisVerticalIcon className="w-5" />
-                            </Menu.Button>
-                          </div>
-                          <Transition
-                            as={Fragment}
-                            enter="transition ease-out duration-100"
-                            enterFrom="transform opacity-0 scale-95"
-                            enterTo="transform opacity-100 scale-100"
-                            leave="transition ease-in duration-75"
-                            leaveFrom="transform opacity-100 scale-100"
-                            leaveTo="transform opacity-0 scale-95"
-                          >
-                            <Menu.Items className="absolute z-50  top-0 left-7 w-56 bg-white dark:bg-[#242526] rounded-md border dark:border-[#3A3B3C]">
-                              <div className="px-1 py-1 ">
-                                <Menu.Item>
-                                  {({ active }) =>
-                                    d.draft ? (
-                                      <button
-                                        onClick={() =>
-                                          changeDraftOrPublish(d._id, false)
-                                        }
-                                        className={`${
-                                          active
-                                            ? "bg-gray-100 text-black dark:bg-[#3A3B3C] dark:text-white"
-                                            : "text-black dark:text-white"
-                                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                                      >
-                                        {t("ARTICLE.ADD.DROPDOWN.PUBLISH")}
-                                      </button>
-                                    ) : (
-                                      <button
-                                        onClick={() =>
-                                          changeDraftOrPublish(d._id, true)
-                                        }
-                                        className={`${
-                                          active
-                                            ? "bg-gray-100 text-black dark:bg-[#3A3B3C] dark:text-white"
-                                            : "text-black dark:text-white"
-                                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                                      >
-                                        {t("ARTICLE.ADD.DROPDOWN.DRAFT")}
-                                      </button>
-                                    )
-                                  }
-                                </Menu.Item>
-                                {d.draft ? null : (
-                                  <>
-                                    <Menu.Item>
-                                      {({ active }) => (
-                                        <div
-                                          className={`${
-                                            active
-                                              ? "bg-gray-100 text-black dark:bg-[#3A3B3C] dark:text-white"
-                                              : "text-black dark:text-white"
-                                          } group flex w-full items-center rounded-md px-2 py-2 text-sm cursor-pointer`}
-                                        >
-                                          <CopyToClipboard
-                                            text={d.url.shortLink}
-                                            onCopy={() =>
-                                              setCopy({ copied: true })
-                                            }
-                                          >
-                                            <button onClick={handleCopyLink}>
-                                              {t("ARTICLE.ADD.DROPDOWN.COPY")}
-                                            </button>
-                                          </CopyToClipboard>
-                                        </div>
-                                      )}
-                                    </Menu.Item>
-                                    <Menu.Item>
-                                      {({ active }) => (
-                                        <button
-                                          className={`${
-                                            active
-                                              ? "bg-gray-100 text-black dark:bg-[#3A3B3C] dark:text-white"
-                                              : "text-black dark:text-white"
-                                          } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                                        >
-                                          {t("ARTICLE.ADD.DROPDOWN.FACEBOOK")}
-                                        </button>
-                                      )}
-                                    </Menu.Item>
-                                    <Menu.Item>
-                                      {({ active }) => (
-                                        <button
-                                          className={`${
-                                            active
-                                              ? "bg-gray-100 text-black dark:bg-[#3A3B3C] dark:text-white"
-                                              : "text-black dark:text-white"
-                                          } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                                        >
-                                          {t("ARTICLE.ADD.DROPDOWN.TWITTER")}
-                                        </button>
-                                      )}
-                                    </Menu.Item>
-                                  </>
-                                )}
-                              </div>
-                            </Menu.Items>
-                          </Transition>
-                        </Menu>
                         {/* end dropdown */}
                       </div>
                     </div>

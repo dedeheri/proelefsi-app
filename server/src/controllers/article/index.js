@@ -3,10 +3,12 @@ import get from "./get.js";
 import deletes from "./deletes.js";
 import detail from "./detail.js";
 import update from "./update.js";
-import analysis from "./analysis.js";
+import chart from "./chart.js";
 import changeDraftOrPublish from "./changeDraftOrPublish.js";
 import imageTempContent from "./imageTempContent.js";
 import linkFetchingEditor from "./linkFetchingEditor.js";
+import total from "./total.js";
+import totalChart from "./totalChart.js";
 
 export {
   add,
@@ -16,6 +18,8 @@ export {
   update,
   changeDraftOrPublish,
   imageTempContent,
-  analysis,
+  chart,
   linkFetchingEditor,
+  total,
+  totalChart,
 };

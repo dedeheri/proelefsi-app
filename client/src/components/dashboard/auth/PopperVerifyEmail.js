@@ -3,7 +3,7 @@ import { CheckIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import verifyEmailAccountAction from "../../../constants/action/auth/action.verifyEmailAccount";
+import { verifyEmailAccountAction } from "../../../constants/action/auth";
 
 function PopperVerifyEmail({ id, verify }) {
   const { t } = useTranslation();

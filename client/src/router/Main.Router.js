@@ -7,6 +7,7 @@ import {
   DetailArticle,
   ShortLink,
   User,
+  Tags,
 } from "../pages/main";
 
 function Main() {
@@ -24,6 +25,8 @@ function Main() {
       <Route path="/:username/:id/:slug" element={<DetailArticle />} />
       {/* search */}
       <Route path="/search" element={<Search />} />
+      {/* tags */}
+      <Route path="/tags" element={<Tags />} />
     </Routes>
   );
 }

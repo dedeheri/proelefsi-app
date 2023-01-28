@@ -6,14 +6,14 @@ import {
   ManageTopics,
   SkeletonHeaderProfile,
 } from "../../../components";
-import { getUser } from "../../../constants/action";
 import { useTranslation } from "react-i18next";
 import { NavLink, Outlet, useParams } from "react-router-dom";
 import { requestGetArticleUserPublished } from "../../../action/user";
+import { profileAction } from "../../../constants/action/dashboard/";
 function Me() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { data, loading } = useSelector((state) => state.profileUser);
+  const { data, loading } = useSelector((state) => state.profilReducer);
 
   const { id } = useParams();
 
@@ -30,10 +30,9 @@ function Me() {
   }, [id]);
 
   useEffect(() => {
-    dispatch(getUser());
+    dispatch(profileAction());
   }, [dispatch]);
 
-  console.log(article);
 
   return (
     <Container title={data.fullname}>
@@ -41,12 +40,11 @@ function Me() {
       {loading ? (
         <SkeletonHeaderProfile />
       ) : (
-        <HeaderMe />
+        <HeaderMe data={data}/>
 
-        //   end
       )}
       <div
-        className="lg:flex w-full md:py-14 md:px-28 py-7 px-10  lg:space-x-9 space-y-9
+        className="lg:flex w-full mt-36 md:py-14 md:px-28 py-7 px-10  lg:space-x-9 space-y-9
           lg:space-y-0"
       >
         <ManageTopics />

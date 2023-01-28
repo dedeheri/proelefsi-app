@@ -26,7 +26,6 @@ function Draft() {
     requestGetArticleUserDraft(setArticle, id, search);
   }, [id, search, page]);
 
-  console.log(article);
 
   return (
     <div className="space-y-10">

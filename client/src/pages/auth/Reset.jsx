@@ -2,33 +2,25 @@ import React, { useEffect, useState } from "react";
 import { Button, Password, Proccess } from "../../components";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
-import { requestResetPassword, requestVerifyToken } from "../../action/account";
-import Expired from "./Expired";
 import Container from "../../components/auth/Container";
+import { getAllCookies } from "../../utils/Cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { resetAction, tokenAction } from "../../constants/action/auth";
 
 function Reset() {
   const { search } = useLocation();
+  const { i18next } = getAllCookies();
+  const dispatch = useDispatch();
+  const { message, error, success, loading } = useSelector(
+    (state) => state.tokenReducer
+  );
 
   const { t } = useTranslation();
-  const [verify, setVerify] = useState({
-    loading: true,
-    error: false,
-    message: "",
-  });
+
   const [state, setState] = useState({
-    fetching: false,
-    message: {
-      error: "",
-      validation: "",
-      success: "",
-    },
     password: "",
     repeatPassword: "",
   });
-
-  useEffect(() => {
-    requestVerifyToken(setVerify, search);
-  }, [search]);
 
   function handleChange(e) {
     setState((prev) => ({
@@ -37,31 +29,38 @@ function Reset() {
     }));
   }
 
-  async function handleOnSubmit(e) {
-    e.preventDefault();
-    await requestResetPassword(setState, search, state);
+  function handleOnSubmit(e) {
+    dispatch(resetAction(search, state.password, state.repeatPassword));
   }
 
-  if (verify.error) {
-    return <Expired message={verify.message} />;
-  }
+  useEffect(() => {
+    dispatch(tokenAction(search));
+  }, [dispatch, i18next, search]);
 
   return (
-    <Container onSubmit={handleOnSubmit}>
-      <Password
-        placeholder={t("AUTH.PASSWORD")}
-        name="password"
-        onChange={handleChange}
-        error={state?.message?.validation?.password?.message}
-      />
-      <Password
-        placeholder={t("AUTH.REPEAT_PASSWORD")}
-        name="repeatPassword"
-        onChange={handleChange}
-        error={state?.message?.validation?.repeatPassword?.message}
-      />
+    <Container title={t("AUTH.TITLE.RESET_PASSWORD")}>
+      {loading ? (
+        <h1>Loading</h1>
+      ) : error ? (
+        <h1>{message}</h1>
+      ) : (
+        <form onSubmit={handleOnSubmit} className="space-y-5">
+          <Password
+            placeholder={t("AUTH.PASSWORD")}
+            name="password"
+            onChange={handleChange}
+            error={state?.message?.validation?.password?.message}
+          />
+          <Password
+            placeholder={t("AUTH.REPEAT_PASSWORD")}
+            name="repeatPassword"
+            onChange={handleChange}
+            error={state?.message?.validation?.repeatPassword?.message}
+          />
 
-      {state.fetching ? <Proccess /> : <Button label={t("AUTH.SEND")} />}
+          {state.fetching ? <Proccess /> : <Button label={t("AUTH.SEND")} />}
+        </form>
+      )}
     </Container>
   );
 }

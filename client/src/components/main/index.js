@@ -9,6 +9,8 @@ import ForYou from "./ForYou";
 import CardVertical from "./CardVertical";
 import MessageNotFound from "./MessageNotFound";
 import Trending from "./Trending";
+import Response from "./Response";
+import TabTopics from "./TabTopics";
 
 // loading
 import CardVerticalLoading from "./Loading/CardVertical";
@@ -19,7 +21,6 @@ import TopicsLoading from "./Loading/Topics";
 import TryAgain from "./Error/TryAgain";
 
 // particle
-import Share from "./Particle/Share";
 import Report from "./Particle/Report";
 import More from "./Particle/More";
 import MaxWidth from "./Particle/MaxWidth";
@@ -27,12 +28,15 @@ import CollapseAds from "./Particle/CollapseAds";
 
 // user
 import Header from "./User/Header";
+import Feed from "./Feed";
 import Content from "./User/Content";
 
 export {
+  TabTopics,
   Container,
   Navbar,
   Navlink,
+  Feed,
   RecommendCardInDetail,
   CardHorizontal,
   Ads,
@@ -48,7 +52,6 @@ export {
   // error
   TryAgain,
   // paricle
-  Share,
   More,
   Report,
   MaxWidth,
@@ -56,4 +59,5 @@ export {
   // user
   Header,
   Content,
+  Response,
 };

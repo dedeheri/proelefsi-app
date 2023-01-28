@@ -9,6 +9,12 @@ const visitor = mongoose.Schema({
   article_id: { type: Array, default: null },
   search_term: { type: Array, default: null },
   not_interseted: { type: Array, default: null },
+  response: {
+    type: Array,
+    article_id: { type: String, default: null },
+    emoji: { type: String, default: null },
+    label: { type: String, default: null },
+  },
   timestamps: {
     type: String,
     default: () => moment().format("dddd, MMMM Do YYYY, h:mm:ss a"),

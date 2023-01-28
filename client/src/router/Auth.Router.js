@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Signin, Signup, Otp, Forget, Reset } from "../pages/auth";
+import { Signin, Signup, Otp, Forget, Reset, Token } from "../pages/auth";
 
 function AuthRouter() {
   return (
@@ -9,6 +9,7 @@ function AuthRouter() {
       <Route path="/otp" element={<Otp />} />
       <Route path="/forget" element={<Forget />} />
       <Route path="/reset-password" element={<Reset />} />
+      <Route path="/validation" element={<Token />} />
       <Route path="/" element={<Navigate to="/account/signin" replace />} />
     </Routes>
   );

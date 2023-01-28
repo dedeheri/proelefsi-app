@@ -28,12 +28,15 @@ function ADDARTICLEIMAGETEMP(fromData) {
 function DELETEDARTICLE(id) {
   return api.delete(`/api/v1/article/${id}`, config.headers);
 }
-function CHANGEDRAFTARTICLE(id, change) {
-  return api.put(
-    `/api/v1/article/change/${id}`,
-    { draft: change },
-    config.headers
-  );
+
+function CHANGEDRAFTARTICLE(id, draft) {
+  return api.put(`/api/v1/article/change/${id}`, { draft }, config.headers);
+}
+function TOTALANYALYSIS() {
+  return api.get(`/api/v1/article/analysis/total`, config.headers);
+}
+function TOTALANYALYSISCHART() {
+  return api.get(`/api/v1/article/analysis/chart`, config.headers);
 }
 
 export {
@@ -45,4 +48,6 @@ export {
   UPDATEARTICLE,
   CHANGEDRAFTARTICLE,
   GETARTICLEANALYSIS,
+  TOTALANYALYSIS,
+  TOTALANYALYSISCHART,
 };

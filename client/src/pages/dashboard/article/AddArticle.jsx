@@ -129,7 +129,6 @@ function AddArticle() {
             )}
             {subTitle && (
               <Input
-                error={addArticleState.message.validation?.title?.message}
                 placeholder={t("ARTICLE.ADD.SUBTITLE")}
                 onChange={handleOnChange}
                 name="subTitle"

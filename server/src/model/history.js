@@ -1,9 +1,9 @@
 import moment from "moment";
 import mongoose from "mongoose";
-import shortId from "shortid";
+import shortId from "../utils/shortId.js";
 
 const authHistory = mongoose.Schema({
-  _id: { type: String, default: shortId.generate },
+  _id: { type: String, default: shortId() },
   userId: { type: String },
   device: {
     os: { type: String, default: null },

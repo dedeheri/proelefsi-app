@@ -20,12 +20,7 @@ function GetArticle() {
   const cookie = getAllCookies();
   const { search } = useLocation();
   const [perPage, setPerPage] = useState(0);
-  const [change, setChange] = useState({
-    message: "",
-    error: "",
-    fetching: false,
-  });
-
+ 
   // redux
   const dispatch = useDispatch();
   const { data, loading, error, message, page } = useSelector(
@@ -34,7 +29,8 @@ function GetArticle() {
 
   useEffect(() => {
     dispatch(getArticleAction(search));
-  }, [dispatch, search, cookie.i18next, perPage, change]);
+  }, [dispatch, search, cookie.i18next, perPage, ]);
+
 
   return (
     <Container title={"TITLE.ARTICLE"}>
@@ -75,7 +71,6 @@ function GetArticle() {
       ) : (
         <TableArticle
           data={data}
-          setChange={setChange}
           page={page}
           perPage={setPerPage}
         />

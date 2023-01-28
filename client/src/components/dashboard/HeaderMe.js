@@ -12,18 +12,17 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import { Dialog, Transition } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
 import { getAllCookies } from "../../utils/Cookie";
-import { getUser } from "../../constants/action";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 
 import { Link } from "react-router-dom";
-
+import { Button, OtherButton } from "../";
 import ModalChangeProfile from "./ModalChangeProfile";
 import ModalChangeBio from "./ModalChangeBio";
+import { profileAction } from "../../constants/action/dashboard";
 
-function HeaderMe() {
+function HeaderMe({ data }) {
   // calling api
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.profileUser);
 
   const { t } = useTranslation();
   const cookie = getAllCookies();
@@ -46,79 +45,38 @@ function HeaderMe() {
   }
 
   useEffect(() => {
-    dispatch(getUser());
+    dispatch(profileAction());
   }, [dispatch]);
 
   return (
-    <div>
-      <div className="bg-blue-50 dark:bg-[#070E1E] rounded-md">
-        <div className="lg:flex space-y-4 lg:space-y-0 md:space-x-9 md:py-14 md:px-28 py-7 px-10">
-          <div className="flex justify-center">
-            <Zoom>
-              <LazyLoadImage
-                effect="blur"
-                alt={data.fullname}
-                src={data.image_url}
-                className="h-32 w-32 lg:w-[11.4rem] lg:h-40 rounded-full"
-              />
-            </Zoom>
-          </div>
-          <div className="w-full space-y-3">
-            {/* name */}
-            <div className="lg:flex justify-between space-y-3 lg:space-y-0">
-              <h1 className="font-medium  text-2xl lg:text-3xl">
-                {data.fullname}
-              </h1>
+    <div className=" max-w-6xl mx-auto">
+      <div className="relative">
+        {/* cover */}
+        <img
+          src={
+            "https://media.istockphoto.com/id/1160720443/vector/abstract-simple-geometric-vector-seamless-pattern-with-gold-line-texture-on-white-background.jpg?s=612x612&w=0&k=20&c=_kgBISj1Wio4LTRdBFN3IttmunACCl1-T5VKdurvb68="
+          }
+          alt={data.fullname}
+          className="w-full h-96 border"
+        />
 
-              <div className="flex space-x-2">
-                <div
-                  onClick={handleModal}
-                  className="font-medium text-white text-md bg-[#2374e1] w-36 h-9 md:h-10 flex items-center justify-center rounded-md hover:bg-blue-500 duration-300 space-x-2 cursor-pointer"
-                >
-                  <PencilIcon className="w-5 md:w-6" />
-                  <h1 className="font-medium text-md md:text-lg">
-                    {t("PROFILE.UPDATE.EDIT")}
-                  </h1>
-                </div>
+        {/* avatar */}
+        <div className="md:px-28 px-10 absolute -bottom-32 flex items-center space-x-3 w-full">
+          <img
+            src={data.image_url}
+            alt={data.fullname}
+            className="w-40 h-40 rounded-full border-4 border-white"
+          />
+          <div className="flex justify-between w-full mt-5">
+            <div className="w-[42rem]">
+              <h1 className="font-medium text-2xl">{data.fullname}</h1>
+              <h1 className="text-lg text-gray-500">{data.bio}</h1>
+            </div>
 
-                <Link
-                  to={"/dashboard/article/add"}
-                  onClick={handleModal}
-                  className="font-medium text-white text-md bg-gray-500 w-44 h-9 md:h-10 flex items-center justify-center rounded-md hover:bg-gray-400 duration-300 space-x-2 cursor-pointer"
-                >
-                  <PlusIcon className="w-5 md:w-6" />
-                  <h1 className="font-medium text-md md:text-lg">
-                    {t("ARTICLE.ADD_ARTICLE")}
-                  </h1>
-                </Link>
-              </div>
+            <div className="flex space-x-2 w-72">
+              <Button label={"Edit"} onClick={handleModal} />
+              <OtherButton label={"Add Article"} />
             </div>
-            {/* email */}
-            <div className="space-y-1">
-              <div className="flex space-x-2">
-                <EnvelopeIcon className="w-5 md:w-6 text-gray-400" />
-                <h1 className="font-medium text-md md:text-lg text-gray-400">
-                  {data.email}
-                </h1>
-              </div>
-              <div className="flex space-x-2">
-                <BriefcaseIcon className="w-5 md:w-6 text-gray-400" />
-                <h1 className="font-medium text-md md:text-lg text-gray-400">
-                  {data.createdAt}
-                </h1>
-              </div>
-            </div>
-            {/* bio */}
-            <p className="!leading-5 block lg:hidden text-lg md:text-xl text-gray-500">
-              {data.bio?.length > 100
-                ? data.bio.substring(0, 100) + "..."
-                : data.bio}
-            </p>
-            <p className="!leading-5 hidden lg:block text-lg md:text-xl text-gray-500">
-              {data.bio?.length > 200
-                ? data.bio.substring(0, 200) + "..."
-                : data.bio}
-            </p>
           </div>
         </div>
       </div>

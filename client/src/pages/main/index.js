@@ -1,11 +1,12 @@
-import Home from "./Home";
-import SearchByTopics from "./SearchByTopics";
-import Topics from "./Topics";
-import Search from "./Search";
-import DetailArticle from "./DetailArticle";
-import ArticleByTopics from "./ArticleByTopics";
-import ShortLink from "./ShortLink";
-import User from "./User";
+import Home from "./Home/Home";
+import SearchByTopics from "./Topics/SearchByTopics";
+import Topics from "./Topics/Topics";
+import Search from "./Article/Search";
+import DetailArticle from "./Article/DetailArticle";
+import ArticleByTopics from "./Article/ArticleByTopics";
+import ShortLink from "./ShortLink/ShortLink";
+import User from "./Article/User";
+import Tags from "./Tags/Tags";
 
 export {
   Home,
@@ -16,4 +17,5 @@ export {
   DetailArticle,
   ArticleByTopics,
   User,
+  Tags,
 };

@@ -1,4 +1,4 @@
-import { CONFIG, GETUSER } from "../../../api/fetching/user";
+import { CONFIG, GETUSER, PROFILE, ROLE } from "../../../api/fetching/user";
 import * as actionType from "../../actiontypes/dashboard";
 
 function userAction(query) {
@@ -46,4 +46,41 @@ function userConfigAction() {
   };
 }
 
-export { userAction, userConfigAction };
+function profileAction() {
+  return async function (dispatch) {
+    try {
+      const response = await PROFILE();
+      dispatch({
+        type: actionType.SUCCESS_GET_PROFILE_USER,
+        payload: response.data.user,
+        message: response.data.message,
+      });
+    } catch (error) {
+      dispatch({
+        type: actionType.FAILED_GET_PROFILE_USER,
+        message: error.response?.data?.message || error?.response?.data?.error,
+      });
+    }
+  };
+}
+
+function roleAction() {
+  return async function (dispatch) {
+    try {
+      const response = await ROLE();
+
+      dispatch({
+        type: actionType.SUCCESS_GET_ROLE,
+        payload: response.data.result,
+        message: response.data.message,
+      });
+    } catch (error) {
+      dispatch({
+        type: actionType.FAILED_GET_ROLE,
+        message: error.response?.data?.message || error?.response?.data?.error,
+      });
+    }
+  };
+}
+
+export { userAction, userConfigAction, profileAction, roleAction };

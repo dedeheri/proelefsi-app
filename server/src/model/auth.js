@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 import shortid from "shortid";
 import moment from "moment";
+import shortId from "../utils/shortId.js";
 
 const config = { type: String };
 const users = mongoose.Schema({
-  _id: { ...config, default: shortid.generate },
+  _id: { ...config, default: shortId() },
   cloudinary_id: { ...config, required: true },
   email: { ...config, required: true },
   password: { ...config, required: true },

@@ -5,7 +5,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { getAllCookies } from "../../../utils/Cookie";
 import { useDispatch, useSelector } from "react-redux";
-import deleteAccountAction from "../../../constants/action/auth/action.deleteAccount";
+import { deleteAccountAction } from "../../../constants/action/auth";
 import { DELETE_ARTICLE_MODAL } from "../../../constants/actiontypes/other";
 
 function DeleteUser() {

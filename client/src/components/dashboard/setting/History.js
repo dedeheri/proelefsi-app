@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { KeyIcon } from "@heroicons/react/24/solid";
-import { requestGetHistoryLogin } from "../../../action/account";
+// import { requestGetHistoryLogin } from "../../../action/account";
 import { SkeletonHistoryLogin } from "../..";
 import { useTranslation } from "react-i18next";
 
@@ -17,7 +17,7 @@ function History() {
   });
 
   useEffect(() => {
-    requestGetHistoryLogin(setHistory);
+    // requestGetHistoryLogin(setHistory);
   }, []);
 
   return (

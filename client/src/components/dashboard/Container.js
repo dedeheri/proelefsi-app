@@ -10,20 +10,21 @@ import ReactTooltip from "react-tooltip";
 
 // redux
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../constants/action";
 import Feedback from "./Feedback";
-import { userConfigAction } from "../../constants/action/dashboard/user.action";
+import { profileAction } from "../../constants/action/dashboard/user.action";
+import ModalLogout from "./ModalLogout";
 
 function Container({ title, childrenError, childrenMessage, children }) {
   const dispatch = useDispatch();
-  const { error, message, data } = useSelector((state) => state.profileUser);
+  const { error, message, data, loading } = useSelector(
+    (state) => state.profilReducer
+  );
 
   const cookie = getAllCookies();
 
   // calling api
   useEffect(() => {
-    dispatch(getUser());
-    dispatch(userConfigAction());
+    dispatch(profileAction());
   }, [dispatch]);
 
   if (error) {
@@ -56,11 +57,11 @@ function Container({ title, childrenError, childrenMessage, children }) {
         <ReactTooltip place="right" type="dark" effect="solid" />
 
         <div className="hidden md:block fixed">
-          <Sidebar otoritas={data.role} />
+          <Sidebar otoritas={data.role} loading={loading} />
         </div>
 
         <Navbar />
-        <SidebarMobile otoritas={data.role} />
+        <SidebarMobile otoritas={data.role} loading={loading} />
         <div className="flex">
           <div className="w-full mb-10 h-full duration-300 md:ml-16">
             {children}
@@ -71,6 +72,7 @@ function Container({ title, childrenError, childrenMessage, children }) {
       {/* feedback */}
 
       <Feedback />
+      <ModalLogout />
     </div>
   );
 }

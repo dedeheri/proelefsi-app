@@ -6,7 +6,7 @@ import { logo, logoLight } from "../../assets/image";
 import { getAllCookies } from "../../utils/Cookie";
 import Footer from "./Footer";
 
-function Container({ onSubmit, children, title }) {
+function Container({ children, title }) {
   const cookie = getAllCookies();
   const {t} = useTranslation()
 

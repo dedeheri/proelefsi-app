@@ -21,6 +21,11 @@ import facebookDark from "./facebook-dark.png";
 import twitterLight from "./twitter-light.png";
 import twitterDark from "./twitter-dark.png";
 import verify from "./verify.png";
+import angry from "./angry.png";
+import haha from "./haha.png";
+import like from "./like.png";
+import wow from "./wow.png";
+import sad from "./sad.png";
 
 export {
   facebookLight,
@@ -46,4 +51,9 @@ export {
   nine,
   ten,
   verify,
+  sad,
+  haha,
+  like,
+  angry,
+  wow,
 };

@@ -4,6 +4,7 @@ import Analysis from "./article/Analysis";
 import GetArticle from "./article/GetArticle";
 import DeleteArticle from "./article/DeleteArticle";
 import EditArticle from "./article/EditArticle";
+import Analysiss from "./article/Analysiss";
 
 // category
 import GetTopics from "./topics/GetTopics";
@@ -31,6 +32,7 @@ import Home from "./home/Home";
 
 export {
   Home,
+  Analysiss,
   Analysis,
   DeleteArticle,
   GetArticle,

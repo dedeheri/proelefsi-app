@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 // redux
 import { useDispatch, useSelector } from "react-redux";
-import signupAction from "../../constants/action/auth/action.signup";
+import { signUpAction } from "../../constants/action/auth";
 import * as actionType from "../../constants/actiontypes/auth";
 
 function Signup() {
@@ -38,7 +38,7 @@ function Signup() {
     formData.append("email", state.email);
     formData.append("password", state.password);
     formData.append("image_url", state.image_url);
-    dispatch(signupAction(formData));
+    dispatch(signUpAction(formData));
   }
 
   useEffect(() => {

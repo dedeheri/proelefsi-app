@@ -1,23 +1,13 @@
-import shortid from "shortid";
 import articleModel from "../../model/article.js";
-import shortLinks from "../../model/shortLink.js";
 import profileModel from "../../model/profile.js";
 import cloudinary from "../../utils/cloudinary.js";
+import shortId from "../../utils/shortId.js";
 import { htmlToText } from "html-to-text";
-
-async function generateShortLink(id) {
-  const baseUrl = process.env.CLIENT_URL;
-  const result = await shortLinks({
-    articleId: id,
-    shortLink: baseUrl + "/link/" + shortid.generate(),
-  }).save();
-
-  return result;
-}
+import generateShortLink from "../../utils/shortLink.js";
 
 async function add(req, res) {
   try {
-    const _id = shortid.generate();
+    const _id = shortId();
     const title = req.body.title;
     const sub_title = req.body.sub_title;
     const draft = req.body.draft;
@@ -75,7 +65,7 @@ async function add(req, res) {
     await articleModel(data).save();
     return res.status(200).json({ message: req.t("ARTICLE.ADD") });
   } catch (error) {
-    if (error.error.errno === -3008) {
+    if (error?.error?.errno === -3008) {
       return res
         .status(500)
         .json({ code: 3008, error: req.t("ERROR.NETWORK") });

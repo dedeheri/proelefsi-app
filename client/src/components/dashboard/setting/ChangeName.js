@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { requestChangeName } from "../../../action/user";
-import { getUser } from "../../../constants/action";
+import { profileAction } from "../../../constants/action/dashboard";
 import Button from "../../init/Button";
 import Input from "../../init/Input";
 import OtherButton from "../../init/OtherButton";
@@ -32,7 +32,7 @@ function ChangeName() {
   const { data, loading } = useSelector((state) => state.profileUser);
 
   useEffect(() => {
-    dispatch(getUser());
+    dispatch(profileAction());
   }, [dispatch]);
 
   useEffect(() => {

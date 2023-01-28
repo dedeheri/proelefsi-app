@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import { profileUser, role } from "./users";
+import { profilReducer, role } from "./users";
 
 // auth
 import {
@@ -9,6 +9,13 @@ import {
   changeRoleAction,
   deleteAccountReducer,
   signInReducer,
+  signOutReducer,
+  forgetPasswordReducer,
+  tokenReducer,
+  resetPasswordReducer,
+  OTPReducer,
+  emailVerificationReducer,
+  resendOTPReducer,
 } from "./auth";
 import {
   otherRedux,
@@ -31,15 +38,36 @@ import {
   userMainReducer,
   articleByUserReducer,
   searchTermHistoryReducer,
+  tagsReducer,
+  feedbackReducer,
+  visitorReducer,
 } from "./main";
 
 // dashboard
-import { article, userReducer } from "./dashboard";
+import {
+  article,
+  userReducer,
+  homeReducer,
+  totalReducer,
+  totalChartReducer,
+} from "./dashboard";
+
+// other
+import { modalLogoutReducer } from "./others";
 
 const combineReducer = combineReducers({
-  profileUser,
+  profilReducer,
+  visitorReducer,
+  totalReducer,
+  feedbackReducer,
+  emailVerificationReducer,
+  resetPasswordReducer,
+  OTPReducer,
+  tokenReducer,
+  signOutReducer,
   role,
   otherRedux,
+  forgetPasswordReducer,
   topics,
   slideSidebarRedux,
   trending,
@@ -55,17 +83,23 @@ const combineReducer = combineReducers({
   shortLink,
   searchResult,
   article,
+  tagsReducer,
   userMainReducer,
   articleByUserReducer,
+  // other
+  modalLogoutReducer,
   // account
   signUpAccount,
   verifyEmailAccountAction,
   changeRoleAction,
   deleteAccountReducer,
   signInReducer,
+  resendOTPReducer,
   // dashboard
   userReducer,
+  homeReducer,
   searchTermHistoryReducer,
+  totalChartReducer,
 });
 
 export default combineReducer;

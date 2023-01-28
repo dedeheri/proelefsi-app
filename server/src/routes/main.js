@@ -16,7 +16,13 @@ import {
   user,
   articleByUser,
   searchHistory,
+  tags,
+  response,
+  visitor,
 } from "../controllers/main/index.js";
+
+// tags
+router.get("/main/tags", tags);
 
 // topics
 router.get("/main/topics", topics);
@@ -30,8 +36,12 @@ router.get("/main/search/term/history", searchHistory);
 // user
 router.get("/main/user/:username", user);
 
+// visitor
+router.get("/main/visitor/create", visitor);
+
 // article
 router.get("/main/article/trending", trending);
+router.post("/main/article/response", response);
 router.get("/main/article/foryou", forYou);
 router.post("/main/article/report", report);
 router.post("/main/article/not-interested", notInterested);

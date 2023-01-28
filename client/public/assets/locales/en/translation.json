@@ -1,5 +1,9 @@
 {
     "AUTH" : {
+        "TITLE" : {
+            "FORGET_PASSWORD" : "Forget password",
+            "RESET_PASSWORD" : "Reset Password"
+        },
         "SIGNIN" : "Sign In",
         "SIGNUP" : "Sign Up",
         "FORGET" : "Forget Password?" ,
@@ -48,6 +52,10 @@
         "ANALYSIS" : "Analysis",
         "FEEDBACK" : "Feedback",
         "ROLE" : "Role"
+    },
+    "HOME" : {
+        "TITLE" : "Home",
+        "ACTIVITY_ARTICLE" : "Activity Article"
     },
     "ARTICLE" : {
         "NAME" : "Article",
@@ -188,6 +196,18 @@
             "SAVE_PHOTO" : "Save Photo",
             "UPDATE_BIODATA" : "Update Biodata",
             "SAVE_BIODATA" : "Save Biodata"
+        }
+    },
+    "MAIN" : {
+        "ARTICLE" : {
+            "RESPONSE" : {
+                "LABEL" : "How would you rate this stories?",
+                "SAD" : "Sad",
+                "HAHA" : "Haha",
+                "LIKE" : "Like",
+                "ANGRY" : "Angry",
+                "WOW" : "Wow"
+            }
         }
     }
 }

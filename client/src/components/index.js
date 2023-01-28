@@ -22,6 +22,7 @@ import TableArticle from "./dashboard/TableArticle";
 import Page from "./dashboard/Page";
 import Modal from "./dashboard/Modal";
 import GridAddArticle from "./dashboard/particle/GridAddArticle";
+import DropdownArticleTable from "./dashboard/particle/DropdownArticleTable";
 
 // category;
 import TableCategory from "./dashboard/TableCategory";
@@ -35,8 +36,7 @@ import SkeletonHeaderProfile from "./dashboard/skeleton/HeaderProfile";
 import SkeletonManageTopics from "./dashboard/skeleton/ManageTopics";
 import SkeletonCardProfile from "./dashboard/skeleton/CardProfile";
 import SkeletonHistoryLogin from "./dashboard/skeleton/HistoryLogin";
-
-import ModalView from "./dashboard/ModalView";
+import SkeletonHome from "./dashboard/skeleton/Home";
 
 // users
 import TableUser from "./dashboard/TableUser";
@@ -47,6 +47,7 @@ import HeaderProfile from "./dashboard/HeaderProfile";
 import ManageTopics from "./dashboard/ManageTopics";
 import CardProfile from "./dashboard/CardProfile";
 import HeaderMe from "./dashboard/HeaderMe";
+import ModalLogout from "./dashboard/ModalLogout";
 
 // role
 import TableRole from "./dashboard/TableRole";
@@ -56,17 +57,19 @@ import History from "./dashboard/setting/History";
 
 // home
 import NewActivityArticle from "./dashboard/NewActivityArticle";
-
 import FilterArticle from "./dashboard/FilterArticle";
-
 import Message from "./dashboard/Message";
 
 // auth
 import PopperVerifyEmail from "./dashboard/auth/PopperVerifyEmail";
 import PopperChangeRole from "./dashboard/auth/PopperChangeRole";
+
+import Chart from "./dashboard/particle/Chart";
+
 export {
   GridAddArticle,
   Input,
+  Chart,
   Editor,
   Button,
   Image,
@@ -78,14 +81,15 @@ export {
   Container,
   TableArticle,
   Page,
+  ModalLogout,
   OtherButton,
   Modal,
   TableCategory,
+  SkeletonHome,
   SkeletonTableCategory,
   FilterCategory,
   Search,
   GridAdd,
-  ModalView,
   ListBoxAdd,
   TableUser,
   FilterUser,
@@ -109,4 +113,5 @@ export {
   Message,
   PopperVerifyEmail,
   PopperChangeRole,
+  DropdownArticleTable,
 };

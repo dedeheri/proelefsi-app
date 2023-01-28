@@ -7,6 +7,8 @@ import verifyToken from "./verifyToken.js";
 import changePassword from "./changePassword.js";
 import deleteAccount from "./deleteAccount.js";
 import verifyEmailAccount from "./verifyEmail.js";
+import signOut from "./signout.js";
+import emailOtp from "./emailOtp.js";
 
 export {
   signUp,
@@ -18,4 +20,6 @@ export {
   changePassword,
   deleteAccount,
   verifyEmailAccount,
+  signOut,
+  emailOtp,
 };

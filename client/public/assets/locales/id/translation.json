@@ -1,5 +1,9 @@
 {
     "AUTH" : {
+        "TITLE" : {
+            "FORGET_PASSWORD" : "Lupa kata sandi",
+            "RESET_PASSWORD" : "Atur ulang kata sandi"
+        },
         "SIGNIN" : "Masuk",
         "SIGNUP" : "Daftar",
         "FORGET" : "Lupa Kata sandi?" ,
@@ -47,6 +51,10 @@
         "ANALYSIS" : "Analisis",
         "FEEDBACK" : "Masukan",
         "ROLE" : "Peran"
+    },
+    "HOME" : {
+        "TITLE" : "Beranda",
+        "ACTIVITY_ARTICLE" : "Aktivitas Artikel"
     },
     "ARTICLE" : {
         "NAME" : "Artikel",
@@ -104,7 +112,10 @@
         "CANCEL" : "Batal",
         "MESSAGE" : "Apakah Anda yakin ingin menghapus?",
         "DELETE_WARNING_ONE" : "Data yang dihapus bersifat permanen",
-        "DELETE_WARNING_TWO" : "Data yang dihapus tidak dapat dipulihkan"
+        "DELETE_WARNING_TWO" : "Data yang dihapus tidak dapat dipulihkan",
+        "MESSAGE_LOGOUT" : "Apakah anda yakin akan keluar?",
+        "LOGOUT" : "Keluar"
+
     },
     "TOPICS" : {
         "ADD_TOPICS" : "Tambahkan Topik",
@@ -185,6 +196,18 @@
             "SAVE_PHOTO" : "Simpan Foto",
             "UPDATE_BIODATA" : "Ubah Biodata",
             "SAVE_BIODATA" : "Simpan Biodata"
+        }
+    },
+    "MAIN" : {
+        "ARTICLE" : {
+            "RESPONSE" : {
+                "LABEL" : "Bagaimana Anda menilai cerita ini?",
+                "SAD" : "Sedih",
+                "HAHA" : "Lucu",
+                "LIKE" : "Suka",
+                "ANGRY" : "Marah",
+                "WOW" : "Mengagumkan"
+            }
         }
     }
 }

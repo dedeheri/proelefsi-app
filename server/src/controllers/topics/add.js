@@ -13,11 +13,12 @@ async function add(req, res) {
     if (topicsExist) {
       return res.status(422).json({ message: req.t("TOPICS.EXIST") });
     } else {
-      await topicsModel({
+      const data = {
         topics: upperCase(topics),
         description: description,
         authour: users._id,
-      }).save();
+      };
+      await topicsModel(data).save();
 
       return res.status(200).json({ message: req.t("TOPICS.ADD") });
     }

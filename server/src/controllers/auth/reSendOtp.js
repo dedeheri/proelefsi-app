@@ -6,7 +6,7 @@ import transporter from "../../utils/mail/transporter.js";
 import configOTP from "../../utils/mail/config/configOTP.js";
 async function reSendOtp(req, res) {
   try {
-    const id = req.decode.id;
+    const id = req.cookies.uid;
     if (id) {
       const users = await userModel.findById({ _id: id });
       const otps = await otpModel.findOne({ authId: users._id });
@@ -14,7 +14,7 @@ async function reSendOtp(req, res) {
       transporter.sendMail(configOTP(users.email, otp), async (err) => {
         if (err) {
           return res
-            .status(404)
+            .status(422)
             .json({ message: req.t("OTP.EMAIL_SEND_FAILED") });
         } else {
           if (otps) {
@@ -35,7 +35,6 @@ async function reSendOtp(req, res) {
       return res.status(500).json({ message: req.t("OTP.EMAIL_SEND_FAILED") });
     }
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ error: req.t("ERROR.WRONG") });
   }
 }

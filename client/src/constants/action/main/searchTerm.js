@@ -14,6 +14,7 @@ function searchTerm(q) {
         message: response.data.message,
       });
     } catch (error) {
+      console.log(error);
       if (error.code === "ERR_NETWORK") {
         dispatch({
           type: actionType.FAILED_GET_SEARCHTERM,
@@ -22,7 +23,8 @@ function searchTerm(q) {
       } else {
         dispatch({
           type: actionType.FAILED_GET_SEARCHTERM,
-          message: error.response?.data?.term || error?.response?.data?.error,
+          message:
+            error.response?.data?.message || error?.response?.data?.error,
         });
       }
     }

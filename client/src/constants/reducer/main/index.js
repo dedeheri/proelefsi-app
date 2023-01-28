@@ -11,8 +11,12 @@ import searchResult from "./searchResult";
 import userMainReducer from "./reducer.user";
 import articleByUserReducer from "./reducer.articleByUser";
 import searchTermHistoryReducer from "./reducer.searchTermHistory";
+import tagsReducer from "./tags.reducer";
+import feedbackReducer from "./feedback.reducer";
+import visitorReducer from "./visitor.reducer";
 
 export {
+  visitorReducer,
   topics,
   byTopics,
   trending,
@@ -26,4 +30,6 @@ export {
   userMainReducer,
   articleByUserReducer,
   searchTermHistoryReducer,
+  tagsReducer,
+  feedbackReducer,
 };

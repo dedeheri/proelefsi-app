@@ -16,6 +16,7 @@ import {
   GetAllRole,
   AddRole,
   Me,
+  Analysiss,
 } from "../pages/dashboard";
 import Published from "../pages/dashboard/users/Published";
 
@@ -54,6 +55,9 @@ function DashboardRouter() {
 
         {/* setting */}
         <Route path="/setting" element={<Setting />} />
+
+        {/* anaylisis */}
+        <Route path="/analysis" element={<Analysiss />} />
 
         {/* notfound */}
         <Route path="*" element={<NotFound />} />

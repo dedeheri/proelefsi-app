@@ -1,5 +1,5 @@
 import moment from "moment";
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 
 const article = mongoose.Schema({
   _id: { type: String },

@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
-import changeRoleAction from "../../../constants/action/auth/action.changeRole";
+import { changeRoleAction } from "../../../constants/action/auth/";
 
 function PopperChangeRole({ role, id }) {
   const dispatch = useDispatch();

@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-import shortid from "shortid";
+import shortId from "../utils/shortId.js";
 import moment from "moment";
 
 const shortLink = mongoose.Schema({
-  _id: { type: String, default: shortid.generate },
+  _id: { type: String, default: shortId() },
   articleId: { type: String, default: null },
   shortLink: { type: String, default: null },
   clicked: { type: Number, default: 0 },

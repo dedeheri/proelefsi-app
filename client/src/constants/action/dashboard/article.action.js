@@ -1,5 +1,6 @@
 import {
   ADDARTICLE,
+  CHANGEDRAFTARTICLE,
   DELETEDARTICLE,
   GETARTICLE,
   GETARTICLEANALYSIS,
@@ -14,7 +15,6 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
 function getArticleAction(query) {
   return async function (dispatch) {
     try {
-      dispatch({ type: actionType.FETCHING_GET_ALL_ARTICLE });
       const response = await GETARTICLE(query);
       dispatch({
         type: actionType.SUCCESS_GET_ALL_ARTICLE,
@@ -178,6 +178,40 @@ function editArticleAction(id, formData) {
   };
 }
 
+function draftArticleAction(id, draft) {
+  return async function (dispatch) {
+    try {
+      dispatch({ type: actionType.FETCHING_DRAFT_ARTICLE });
+      const response = await CHANGEDRAFTARTICLE(id, draft);
+      toaster("success", response.data.message);
+      dispatch({
+        type: actionType.SUCCESS_DRAFT_ARTICLE,
+        message: response.data.message,
+      });
+
+      if (response.status === 200) {
+        setInterval(() => {
+          window.location.reload();
+        }, 3000);
+      }
+    } catch (error) {
+      if (error.response.status === 500) {
+        toaster("error", error.response.data.error);
+        dispatch({
+          type: actionType.FAILED_DRAFT_ARTICLE,
+          message: error.response.data.error,
+        });
+      } else {
+        toaster("error", error.response.data.message);
+        dispatch({
+          type: actionType.FAILED_DRAFT_ARTICLE,
+          message: error.response.data.message,
+        });
+      }
+    }
+  };
+}
+
 export {
   getArticleAction,
   deleteArticleAction,
@@ -185,4 +219,5 @@ export {
   detailArticleAction,
   addArticeAction,
   editArticleAction,
+  draftArticleAction,
 };

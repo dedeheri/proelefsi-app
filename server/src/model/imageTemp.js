@@ -1,9 +1,9 @@
 import moment from "moment";
 import mongoose from "mongoose";
-import shortid from "shortid";
+import shortId from "../utils/shortId.js";
 
 const imageTemp = mongoose.Schema({
-  _id: { type: String, default: shortid.generate },
+  _id: { type: String, default: shortId() },
   authId: { type: String, default: null },
   image_content: { type: String },
   cloudinary_id: { type: String },

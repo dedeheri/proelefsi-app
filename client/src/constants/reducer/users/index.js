@@ -1,4 +1,4 @@
-import profileUser from "./profile";
+import profilReducer from "./profile.reducer";
 import role from "./role";
 
-export { profileUser, role };
+export { profilReducer, role };

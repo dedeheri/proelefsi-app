@@ -13,8 +13,10 @@ import {
   update,
   changeDraftOrPublish,
   imageTempContent,
-  analysis,
+  chart,
   linkFetchingEditor,
+  total,
+  totalChart,
 } from "../controllers/article/index.js";
 
 const route = e.Router();
@@ -69,7 +71,9 @@ route.put(
 );
 // get all article
 route.get("/article", tokenVerify, verifyEmail, get);
-// get all article
-route.get("/article/:id/analysis", tokenVerify, verifyEmail, analysis);
+// get detail anaylys
+route.get("/article/:id/analysis", tokenVerify, verifyEmail, chart);
+route.get("/article/analysis/total", tokenVerify, verifyEmail, total);
+route.get("/article/analysis/chart", tokenVerify, verifyEmail, totalChart);
 
 export default route;

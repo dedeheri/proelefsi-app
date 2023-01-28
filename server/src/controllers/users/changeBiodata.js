@@ -19,7 +19,6 @@ async function changeBiodata(req, res) {
       .status(200)
       .json({ message: req.t("USERS.SUCCESS_CHANGE_BIODATA") });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ error: req.t("ERROR.WRONG") });
   }
 }

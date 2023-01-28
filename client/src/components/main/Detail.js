@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
-import Share from "./Particle/Share";
 import More from "./Particle/More";
 import MaxWidth from "./Particle/MaxWidth";
 
 import { useEffect } from "react";
 import { getAllCookies } from "../../utils/Cookie";
+import { verify } from "../../assets/image";
+import { ShareIcon } from "@heroicons/react/24/outline";
+import Ads from "./Ads";
 
 function Detail({ data, error, message, loading }) {
   const { theme } = getAllCookies();
@@ -31,7 +33,7 @@ function Detail({ data, error, message, loading }) {
         }
       }
     }
-  }, [data]);
+  }, [data, theme]);
 
   return (
     <MaxWidth>
@@ -93,15 +95,18 @@ function Detail({ data, error, message, loading }) {
               />
               <div className="w-full">
                 <div className="flex space-x-2 justify-between items-center">
-                  <Link to={"/" + data.authour.username}>
+                  <Link
+                    to={"/" + data.authour.username}
+                    className="flex items-center space-x-2"
+                  >
                     <h1 className="font-medium text-lg text-gray-700 hover:text-black duration-300 dark:text-white">
                       {data.authour.fullname}
                     </h1>
+                    <img src={verify} className="w-4 h-4" />
                   </Link>
 
                   <div className="space-x-2 flex items-center">
-                    <Share result={data} />
-                    <More title={data.title} id={data._id} />
+                    <More title={data.title} id={data._id} result={data} />
                   </div>
                 </div>
                 <div className="flex text-md space-x-2">
@@ -140,7 +145,17 @@ function Detail({ data, error, message, loading }) {
           </Zoom>
           {/* content */}
           <div className="max-w-3xl mx-auto space-y-9 ">
-            {data.content.map((_, index) => (
+            {data.content.slice(0, 4).map((_, index) => (
+              <div
+                className="font-serif text-lg  md:text-xl text-gray-800 dark:text-gray-300"
+                key={index}
+                dangerouslySetInnerHTML={{ __html: _ }}
+              />
+            ))}
+
+            <Ads />
+
+            {data.content.slice(4, data.content.length).map((_, index) => (
               <div
                 className="font-serif text-lg  md:text-xl text-gray-800 dark:text-gray-300"
                 key={index}
@@ -148,17 +163,19 @@ function Detail({ data, error, message, loading }) {
               />
             ))}
             {/* tags */}
-            <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-              {data.tags.map((_, i) => (
-                <Link
-                  key={i}
-                  to={`/tags/${_}`}
-                  className="bg-gray-100 dark:bg-[#242526] hover:dark:bg-[#444444] dark:!text-white flex justify-center !text-black px-4 py-1 rounded-full text-lg duration-300"
-                >
-                  {_}
-                </Link>
-              ))}
-            </div>
+            {data.tags.length === 0 && (
+              <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                {data.tags.map((_, i) => (
+                  <Link
+                    key={i}
+                    to={`/tags/${_}`}
+                    className="bg-gray-100 dark:bg-[#242526] hover:dark:bg-[#444444] dark:!text-white flex justify-center !text-black px-4 py-1 rounded-full text-lg duration-300"
+                  >
+                    {_}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       )}

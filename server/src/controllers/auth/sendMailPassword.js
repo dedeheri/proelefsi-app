@@ -12,12 +12,12 @@ async function sendMailPassword(req, res) {
   }
 
   try {
-    const jwt = _refreshToken(users._id, "5m");
-    const link = `${process.env.CLIENT_URL}/account/reset-password?token=${jwt}`;
+    const jwt = _refreshToken(users._id, "1m");
+    const link = `${process.env.CLIENT_URL}/account/validation?token=${jwt}`;
     transporter.sendMail(reset(users.email, link), async (err) => {
       if (err) {
         return res
-          .status(404)
+          .status(500)
           .json({ message: req.t("FORGET.EMAIL_SEND_FAILED") });
       } else {
         return res.status(200).json({

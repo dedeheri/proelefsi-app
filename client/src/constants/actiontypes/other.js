@@ -9,3 +9,4 @@ export const DELETE_ARTICLE_MODAL = "DELETE_ARTICLE_MODAL";
 
 // sidebar
 export const SLIDE_SIDEBAR = "SLIDE_SIDEBAR";
+export const MODAL_LOGOUT = "MODAL_LOGOUT";

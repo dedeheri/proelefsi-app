@@ -1,9 +1,9 @@
 import moment from "moment";
 import mongoose from "mongoose";
-import shortid from "shortid";
+import shortId from "../utils/shortId.js";
 
 const otp = mongoose.Schema({
-  _id: { type: String, default: shortid.generate },
+  _id: { type: String, default: shortId() },
   authId: { type: String, default: null },
   OTP: { type: String, default: null },
   createdAt: { type: Date, default: Date.now, index: { expires: 300000 } },

@@ -8,7 +8,7 @@ import {
   SkeletonTableCategory,
   TableRole,
 } from "../../../components";
-import { getRole } from "../../../constants/action";
+import { roleAction } from "../../../constants/action/dashboard";
 
 function GetAllRole() {
   const { t } = useTranslation();
@@ -17,7 +17,7 @@ function GetAllRole() {
   const { data, error, loading, message } = useSelector((state) => state.role);
 
   useEffect(() => {
-    dispatch(getRole());
+    dispatch(roleAction());
   }, [dispatch]);
 
   return (

@@ -30,7 +30,7 @@ async function history(users) {
 
 async function otpVerify(req, res) {
   try {
-    const otp = req.body.otp;
+    const otp = req.body.otp.toString();
     const id = req.cookies.uid;
     const remember_me = req.cookies.remember_me;
 
@@ -38,15 +38,16 @@ async function otpVerify(req, res) {
     const users = await profileModel.findOne({ authId: id });
 
     if (checkOTP === null) {
-      return res.status(500).json({
+      return res.status(422).json({
         message: {
           OTP: req.t("OTP.EXPIRED"),
         },
       });
     }
-    const compareOTP = await bcrypt.compare(otp, checkOTP.OTP);
-    if (!compareOTP) {
-      return res.status(500).json({
+
+    const otpVerify = await bcrypt.compare(otp, checkOTP.OTP);
+    if (!otpVerify) {
+      return res.status(422).json({
         message: {
           OTP: req.t("OTP.VERIFY_FAILED"),
         },
@@ -72,6 +73,7 @@ async function otpVerify(req, res) {
       });
     }
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ error: req.t("ERROR.WRONG") });
   }
 }

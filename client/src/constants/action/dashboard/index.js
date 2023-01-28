@@ -3,7 +3,14 @@ import {
   deleteArticleAction,
   analysisArticleAction,
 } from "./article.action";
-import { userAction, userConfigAction } from "./user.action";
+import {
+  userAction,
+  userConfigAction,
+  profileAction,
+  roleAction,
+} from "./user.action";
+
+import totalAction from "./article/total.action";
 
 export {
   getArticleAction,
@@ -11,4 +18,7 @@ export {
   analysisArticleAction,
   userAction,
   userConfigAction,
+  profileAction,
+  roleAction,
+  totalAction,
 };

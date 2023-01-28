@@ -1,9 +1,9 @@
 import moment from "moment";
 import mongoose from "mongoose";
-import shortId from "shortid";
+import shortId from "../utils/shortId.js";
 
 const topics = mongoose.Schema({
-  _id: { type: String, default: shortId.generate },
+  _id: { type: String, default: shortId() },
   topics: { type: String, trim: true },
   stories: { type: Number, default: 0 },
   description: { type: String, trim: true },

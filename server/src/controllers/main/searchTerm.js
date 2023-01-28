@@ -13,13 +13,13 @@ async function searchTerm(req, res) {
     for (let i = 0; i < resultQuery.length; i++) {
       result.push({
         title: resultQuery[i].title,
+        url: resultQuery[i].url.originalLink,
       });
     }
 
     if (result.length === 0) {
       return res.status(404).json({
         message: "Pencarian tidak ditemukan",
-        term: `Cari dalam ${q}`,
       });
     } else {
       return res.status(200).json({
